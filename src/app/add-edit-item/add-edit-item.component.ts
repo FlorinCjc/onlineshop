@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnChanges, SimpleChanges} from '@angular/core';
 import { MatCardModule} from "@angular/material/card";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
@@ -22,7 +22,7 @@ import {ItemService} from "../item.service";
   templateUrl: './add-edit-item.component.html',
   styleUrl: './add-edit-item.component.css'
 })
-export class AddEditItemComponent {
+export class AddEditItemComponent implements OnChanges{
   // value='salut';
   title: string="";
   description: string="";
@@ -30,6 +30,7 @@ export class AddEditItemComponent {
   imageUrl: string="";
   // dependency injection ne ajuta sa injectam obiecte in constructor
   //Angular se va ocupa de initializarea lor
+  @Input() item : any; // creaza un atribut pentru tag-ul de htm; exemplu : class,style,name,etc
   constructor(private itemService:ItemService){
 
   }
@@ -52,5 +53,29 @@ export class AddEditItemComponent {
 
     this.itemService.createItem(item);
 
+  }
+  submitForm(){
+    let body ={
+      id:this.item != null ? this.item.id : "",
+
+    };
+    if(body.id == ""){
+      this.itemService.createItem(body);
+    }else{
+      this.itemService.updateItem(body);
+    }
+  }
+  ngOnChanges(changes : SimpleChanges) {
+    //aceasta metoda se apeleaza atunci cand elementele de la @Input() se schimba
+    console.log("ngOnChanges()");
+    console.log(this.item); // vom afisa atunci cand se schimba itemul ce l avem mai sus
+
+    if(this.item != null) {
+      console.log("Am primit o valoare noua pentru item dupa ce am apasat butonul Edit")
+      this.title = this.item.title;
+      this.description = this.item.description;
+      this.price = this.item.price;
+      this.imageUrl = this.item.imageUrl;
+      }
   }
 }
