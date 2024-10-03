@@ -5,7 +5,7 @@ import {MatFormField, MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule} from "@angular/forms";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
-import {ItemService} from "../item.service";
+import {ItemService} from "../services/item.service";
 
 @Component({
   selector: 'app-add-edit-item',// il folosim ca sa apelam componenta de angular : <app-add-edit-item></app-add-edit-item>
@@ -57,7 +57,10 @@ export class AddEditItemComponent implements OnChanges{
   submitForm(){
     let body ={
       id:this.item != null ? this.item.id : "",
-
+    title: this.title,
+      description: this.description,
+      price: this.price,
+      imageUrl: this.imageUrl
     };
     if(body.id == ""){
       this.itemService.createItem(body);

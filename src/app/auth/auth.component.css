@@ -1,0 +1,12 @@
+.input-form-field{
+  width: 500px;
+}
+.display-grid{
+  display:grid;
+}
+.margin-buttom-15{
+  margin-bottom: 15px !important;
+}
+.margin-buttom-100{
+  margin-bottom: 100px;
+}
