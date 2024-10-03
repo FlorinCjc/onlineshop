@@ -1,0 +1,20 @@
+<!--<div>-->
+<!--  <p *ngFor="let item of itemsList">-->
+<!--  {{item}}-->
+<!--  </p>-->
+<!--</div>-->
+<!-- Template pentru datele pe care noi le vom primii-->
+<!-- interpolare de stringuri sau acolade duble ctrl / -->
+<mat-card *ngFor="let item of itemsList">
+  <mat-card-content>
+    <p>Title: {{item.title}} </p>
+    <p>Description: {{item.description}} </p>
+    <p>Price: {{item.price}} </p>
+    <p>ImageUrl: {{item.imageUrl}} </p>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button (click) ="onDeleteItem(item.id)">Delete</button>
+    <button mat-flat-button (click) ="onEditItem(item)">Edit</button>
+  </mat-card-actions>
+
+</mat-card>
